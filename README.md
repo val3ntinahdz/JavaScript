@@ -1,1 +1,1 @@
-# Javascript_projects
+# JavaScript projects from MiduDev Challenges
