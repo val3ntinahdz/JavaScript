@@ -26,5 +26,11 @@ console.log('Lat:', character.coords.lat);
 console.log('Suit number:', character.suits.length);
 console.log('Last suit:', character.suits[character.suits.length - 1]);
 
+character.codeName = [character.codeName]
+character.codeName.push('Tony');
+console.log('New codename:', character.codeName[character.codeName.length - 1]);
+
 const x = 'alive';
 console.log('alive?', character[x]);
+
+
