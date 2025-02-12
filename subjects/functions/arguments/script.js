@@ -1,12 +1,5 @@
 'use strict';
 
-// function createPerson( firstName, lastName ) {
-//     return {
-//         firstName,
-//         lastName
-//     }
-// }
-
 const createPerson = ( firstName, lastName ) => ({ firstName, lastName });
 
 const person = createPerson( 'Ford', 'Prefect' );
@@ -28,8 +21,10 @@ printArguments(42, true, false, "rouge", "La vie est belle");
 // const arrayArgs = printArguments2(42, true, false, "Beeblebrox", "...est belle");
 // console.log( arrayArgs );
 
+//
 const [ number, logical, mentallyStable, mrPresident, laVie ] = printArguments2(42, true, false, "Zaphod Beeblebrox", "...est belle");
 console.log({ number, logical, mentallyStable, mrPresident, laVie });
 
+// We can re-assign attributes when defining them
 const { lastName: newLastName } = createPerson('Valentina', 'León' );
 console.log({ newLastName });
