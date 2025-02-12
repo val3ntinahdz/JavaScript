@@ -1,4 +1,4 @@
-# JavaScript projects from MiduDev Challenges
+# JavaScript projects
 1. Swiper
 2. Arkanoid Game
 3. Challenge de Mecanografía
