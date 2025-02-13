@@ -57,6 +57,8 @@ const missionInterstellar = {
     missionSuccessProbability: 42 // lol
 };
 
+
+// nested destructuring
 const {
     missionName,
     ship: { name: shipName, launchYear, fuel, modules, aiSupport },
@@ -65,8 +67,20 @@ const {
     missionSuccessProbability
 } = missionInterstellar
 
-console.log(missionName);
-console.log(shipName);
+const [ one, two, three, four ] = modules;
+const [ firstMember, secondMember ] = supportingMembers; // array
+const { name: firstMemberName, role: firstMemberRole } = firstMember;
+
+const { name: scientistName, role, expertise } = scientist;
+const { name: commanderName, experience } = commander;
+
+const [ firstPlanet, secondPlanet, thirdPlanet ] = planetsExplored; // array
+const { notes: thirdPlanetNotes } = thirdPlanet; // access individual attributes in the object
 
 
-  
+console.log('Mission name:', missionName);
+console.log(`Ship: ${shipName}, launched on: ${launchYear}, with a fuel of ${fuel}`); 
+console.log('Scientist:', scientistName + ',', 'role:', role + ',', 'expertise:', expertise.join(', '));
+console.log('supporting member one:', firstMemberName + ',', 'profession: ', firstMemberRole);
+console.log('Notes about the third planet explored -', `${thirdPlanet.name}` + ':', thirdPlanetNotes);
+console.log('Success probability:', `${missionSuccessProbability}%`);
