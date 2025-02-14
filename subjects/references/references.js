@@ -19,12 +19,13 @@ console.log({ harry, louis });
 //     person.name = 'Zayn';
 //     return person
 // } // 
-// this returns -> {liam: {…}, zayn: {…}}liam: {name: 'Zayn'}zayn: {name: 'Zayn'}, but, wtf?!
+// this example returns -> {liam: {…}, zayn: {…}}liam: {name: 'Zayn'}zayn: {name: 'Zayn'}, but, wtf?!
 
 
 // The 'rest' parameter unifies various elements and returns an array of them.
 // MDN Web Docs definition: The rest syntax collects multiple elements and "condenses" them into a single element.
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+
 
 // When passing an object to a function, it is passed by reference. Modifying the object's properties
 // inside the function will also modify the original object.
@@ -60,11 +61,17 @@ console.table({ fruits2, otherFruits2 });
 // fruits2	'apple'	'pear'	'pineapple'	
 // otherFruits2	'apple'	'pear'	'pineapple'	'watermelon sugar'
 
-// The slice() method
+
+// Slice() 
 const coolStuff = ['Watching the sunset', 'Taking pics', 'Romanticizing life'];
 
-// By using the 'spread' operator, to separate every element in the array and return them independently.
+// the slice() method of array instances returns a new array.
+// p.d. it doesn't modify the original array!
+
+// console.time() starts a timer you can use to track how much time an operation takes. Very useful!
+console.time('slice');
 const moreCoolStuff = coolStuff.slice();
+console.timeEnd('slice');
 
 moreCoolStuff.push('Coding in javascript');
 console.table({ coolStuff, moreCoolStuff }); 
