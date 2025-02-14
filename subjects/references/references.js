@@ -10,7 +10,7 @@ console.log({ a, b });
 let harry = { name: 'Harry' };
 
 // The principal advantage of the spread operator is that it creates a shallow copy of the object,
-// meaning that the top-level properties are copied, but nested objects are still referenced in memory.
+// meaning top-level properties are copied by value, but nested objects still point to the same reference in memory.
 let louis = { ...harry }; // The 'spread' syntax expands an array into its elements
 louis.name = 'Louis';
 console.log({ harry, louis });
@@ -25,6 +25,9 @@ console.log({ harry, louis });
 // The 'rest' parameter unifies various elements and returns an array of them.
 // MDN Web Docs definition: The rest syntax collects multiple elements and "condenses" them into a single element.
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+
+// When passing an object to a function, it is passed by reference. Modifying the object's properties
+// inside the function will also modify the original object.
 const changeName = ({ ...person }) => {
     person.name = 'Zayn';
     return person
@@ -56,3 +59,12 @@ console.table({ fruits2, otherFruits2 });
 // The output now is:
 // fruits2	'apple'	'pear'	'pineapple'	
 // otherFruits2	'apple'	'pear'	'pineapple'	'watermelon sugar'
+
+// The slice() method
+const coolStuff = ['Watching the sunset', 'Taking pics', 'Romanticizing life'];
+
+// By using the 'spread' operator, to separate every element in the array and return them independently.
+const moreCoolStuff = coolStuff.slice();
+
+moreCoolStuff.push('Coding in javascript');
+console.table({ coolStuff, moreCoolStuff }); 
