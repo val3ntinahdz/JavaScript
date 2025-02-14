@@ -34,3 +34,25 @@ let liam = { name: 'Liam' };
 let zayn = changeName(liam);
 
 console.log({ liam, zayn });
+
+// Arrays
+const fruits = ['apple', 'pear', 'pineapple'];
+const otherFruits = fruits;
+
+otherFruits.push('mango');
+console.table({ fruits, otherFruits });
+// By printing this, the following structure appears: 
+// fruits	'apple'	'pear'	'pineapple'	'mango'
+// otherFruits	'apple'	'pear'	'pineapple'	'mango'
+// But, 'mango' appears twice... this is because if i modify an element inside the array, it will be reflected in both sides of the table.
+
+const fruits2 = ['apple', 'pear', 'pineapple'];
+
+// By using the 'spread' operator, to separate every element in the array and return them independently.
+const otherFruits2 = [...fruits2];
+
+otherFruits2.push('watermelon sugar');
+console.table({ fruits2, otherFruits2 }); 
+// The output now is:
+// fruits2	'apple'	'pear'	'pineapple'	
+// otherFruits2	'apple'	'pear'	'pineapple'	'watermelon sugar'
