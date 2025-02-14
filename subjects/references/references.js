@@ -25,10 +25,10 @@ console.log({ harry, louis });
 // The 'rest' parameter unifies various elements and returns an array of them.
 // MDN Web Docs definition: The rest syntax collects multiple elements and "condenses" them into a single element.
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-const changeName = (...person) => {
+const changeName = ({ ...person }) => {
     person.name = 'Zayn';
     return person
-}
+} // this correctly prints the objects with its associated value -> {liam: {…}, zayn: {…}} liam: {name: 'Liam'}, zayn: {name: 'Zayn'}
 
 let liam = { name: 'Liam' };
 let zayn = changeName(liam);
