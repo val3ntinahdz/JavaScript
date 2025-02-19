@@ -85,4 +85,3 @@ calcTicketPrice(age2, hour, groupLength);
 
 
 
-
