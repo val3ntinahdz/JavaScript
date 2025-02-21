@@ -2,10 +2,10 @@ const cars = ['Ford', 'Honda', 'Toyota'];
 
 let i = 0;
 
-// while syntax
-// while(i < cars.length) {
-//     console.log(cars[i]);
-//     i++;
+// WHILE
+// SYNTAX:
+// while (condition) {
+//     // loop body
 // }
 
 while(cars[i]) {
@@ -17,3 +17,19 @@ while(cars[i]) {
     console.log(cars[i]);
     i++;
 }
+
+
+// DO... WHILE
+console.warn('Do While');
+// The only difference between 'do while' syntax and the previous one,
+// is that 'Do While' will execute the internal block once.
+// SYNTAX:
+// do {
+//     // loop body
+// } while (condition);
+let j = 2;
+
+do {
+    console.log(cars[j]);
+    j++;
+} while (j < cars.length); // output: Toyota
