@@ -9,9 +9,9 @@ let i = 0;
 // }
 
 while(cars[i]) {
-    if (i === 1) {
-        i++
-        continue;
+    if (i === 1) { // this condition ensures that the element in the '1' position is skipped
+        i++;
+        continue; // skips the rest of the loop's body for this iteration, meaning 'Honda' will not be printed.
     }
 
     console.log(cars[i]);
