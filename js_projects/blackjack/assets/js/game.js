@@ -35,13 +35,12 @@ createDeck();
 // This function allows the user to ask for a card
 const askForCard = () => {
     if (deck.length === 0) {
-        console.log('Deck is empty!');
-        return null;
+        throw 'Deck is empty'; // handle edge cases
     }
-    
+
     const i = Math.floor(Math.random() * deck.length);
     const randomCard = deck[i];
-    deck.splice(i, 1);
+    deck.splice(i, 1); // https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript
 
     console.log('Random card:', randomCard);
     console.log(deck);
