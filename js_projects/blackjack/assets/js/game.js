@@ -48,3 +48,15 @@ const askForCard = () => {
 }
 
 askForCard();
+
+const cardValue = (card) => {
+    // Substring method reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
+    const val = card.substring(0, card.length - 1); // extract the card value
+
+    return (isNaN(val)) ?
+           (val === 'A') ? 11 : 10
+           : val * 1;
+}
+
+const val = cardValue(askForCard());
+console.log(val);
