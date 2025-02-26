@@ -9,15 +9,17 @@ let deck = [];
 const types = ['C', 'D', 'H', 'S'];
 const extraCards = ['A', 'J', 'Q', 'K'];
 
-let playerPoints = 0,
-    computerPoints = 0;
+let playerPoints    = 0,
+    computerPoints  = 0;
 
 // HTML references
 btnAsk = document.querySelector('#btnAsk');
+btnStop = document.querySelector('#btnStop');
+btnNew = document.querySelector('#btnNew');
 
-const playerCards = document.querySelector('#player-cards');
+const playerCards   = document.querySelector('#player-cards');
 const computerCards = document.querySelector('#computer-cards');
-const pointsHTML = document.querySelectorAll('small');
+const pointsHTML    = document.querySelectorAll('small');
 
 // This function creates a new deck
 const createDeck = () => {
@@ -70,6 +72,32 @@ const cardValue = (card) => {
 const val = cardValue(askForCard());
 console.log(val);
 
+// COMPUTER'S TURN
+// The computer will ask for cards 
+const computerTurn = (minimumPoints) => {
+    do {
+
+        const card = askForCard(); // generated card
+        console.log(card);
+
+        computerPoints = computerPoints + cardValue(card); // the card i generated
+        console.log('computer points:', computerPoints);
+        pointsHTML[1].innerText = computerPoints; // access the first <small> element in the HTML with its index (0)
+
+        // Create new card every time the player points are calculated to build a deck
+        const imgCard = document.createElement('img');
+        imgCard.src = `assets/cards/${card}.png`;
+        imgCard.classList.add('card');
+        computerCards.append(imgCard);
+
+        if (minimumPoints > 21) {
+            break;
+        }
+    
+
+    } while ((computerPoints < minimumPoints) && (minimumPoints <= 21));
+}
+
 // document.body.onload = createButton; 
 // document.body.onload = createInput;
 
@@ -114,9 +142,25 @@ btnAsk.addEventListener('click', () => {
     // check if player won or lost 
     if (playerPoints > 21) {
         console.warn('Sorry loser!');
-        btnAsk.disabled = true;
+        btnAsk.disabled = true; // deactivate the action buttons once the player has reached more than 21 points
+        btnStop.disabled = true; 
+        
+        computerTurn(playerPoints);
+        
     } else if (playerPoints === 21) {
         console.warn('21! you nailed it');
+        computerTurn(playerPoints);
     }
-    // deactivate the action buttons
+
+    btnStop.addEventListener('click', () => {
+        btnStop.disabled = true;
+        btnAsk.disabled = true;
+
+        computerTurn(playerPoints); // shoot the computer turn now and compare points!
+    })
+
+    btnNew.addEventListener('click', () => {
+        window.location.reload();
+    })
+
 })

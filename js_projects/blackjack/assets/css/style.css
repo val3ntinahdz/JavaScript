@@ -4,6 +4,12 @@ html, body {
     color: white;
 }
 
+.cards-col {
+    display: flex;
+    flex-direction: column;
+    margin-left: -10px;
+}
+
 .title {
     text-align: center;
     background-color: black;
