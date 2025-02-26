@@ -96,30 +96,20 @@ const computerTurn = (minimumPoints) => {
     
 
     } while ((computerPoints < minimumPoints) && (minimumPoints <= 21));
+
+    setTimeout(() => {
+        if (computerPoints > 21) {
+            alert("Congrats player! You've earned an esquite");
+        } else if (minimumPoints > 21) {
+            alert("Pffff, the computer did it again! Good luck next time.");
+        } else if (computerPoints === minimumPoints) {
+            alert("What a stupid game! No one won.");
+        } else {
+            alert("Computer won!")
+        }
+    }, 10);
+
 }
-
-// document.body.onload = createButton; 
-// document.body.onload = createInput;
-
-// function createButton() {
-//     const divButtons = document.getElementById('divButtons');
-//     const newButton = document.createElement('button');
-
-//     divButtons.append(newButton);
-//     newButton.innerText = 'destroy the world';
-//     newButton.classList.add('btn-success');
-// }
-
-// function createInput() {
-//     const doc = document.querySelector('body');
-
-//     const input = document.createElement('input');
-//     input.classList.add('form-control');
-//     doc.appendChild(input);
-
-//     input.placeholder = 'hello world!';
-// }
-
 
 // When we work with an element multiple times, it is recommended to create a variable for it
 
@@ -151,16 +141,15 @@ btnAsk.addEventListener('click', () => {
         console.warn('21! you nailed it');
         computerTurn(playerPoints);
     }
+});
 
-    btnStop.addEventListener('click', () => {
-        btnStop.disabled = true;
-        btnAsk.disabled = true;
+btnStop.addEventListener('click', () => {
+    btnStop.disabled = true;
+    btnAsk.disabled = true;
 
-        computerTurn(playerPoints); // shoot the computer turn now and compare points!
-    })
+    computerTurn(playerPoints); // shoot the computer turn now and compare points!
+})
 
-    btnNew.addEventListener('click', () => {
-        window.location.reload();
-    })
-
+btnNew.addEventListener('click', () => {
+    window.location.reload();
 })
