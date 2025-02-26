@@ -9,6 +9,13 @@ let deck = [];
 const types = ['C', 'D', 'H', 'S'];
 const extraCards = ['A', 'J', 'Q', 'K'];
 
+let playerPoints = 0,
+    computerPoints = 0;
+
+// HTML references
+btnAsk = document.querySelector('#btnAsk');
+
+const pointsHtml = document.querySelectorAll('small');
 
 // This function creates a new deck
 const createDeck = () => {
@@ -60,3 +67,41 @@ const cardValue = (card) => {
 
 const val = cardValue(askForCard());
 console.log(val);
+
+// document.body.onload = createButton; 
+// document.body.onload = createInput;
+
+// function createButton() {
+//     const divButtons = document.getElementById('divButtons');
+//     const newButton = document.createElement('button');
+
+//     divButtons.append(newButton);
+//     newButton.innerText = 'destroy the world';
+//     newButton.classList.add('btn-success');
+// }
+
+// function createInput() {
+//     const doc = document.querySelector('body');
+
+//     const input = document.createElement('input');
+//     input.classList.add('form-control');
+//     doc.appendChild(input);
+
+//     input.placeholder = 'hello world!';
+// }
+
+
+// When we work with an element multiple times, it is recommended to create a variable for it
+
+// Events
+// -> A function that is being passed as an argument is known as "callback"
+btnAsk.addEventListener('click', () => {
+    const card = askForCard();
+    console.log(card);
+
+    playerPoints = playerPoints + cardValue(card); // the card i generated
+    console.log('player points:', playerPoints);
+    pointsHtml[0].innerText = playerPoints;
+
+    // Create new card every time the player points are calculated to build a deck
+})
