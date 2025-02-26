@@ -15,7 +15,9 @@ let playerPoints = 0,
 // HTML references
 btnAsk = document.querySelector('#btnAsk');
 
-const pointsHtml = document.querySelectorAll('small');
+const playerCards = document.querySelector('#player-cards');
+const computerCards = document.querySelector('#computer-cards');
+const pointsHTML = document.querySelectorAll('small');
 
 // This function creates a new deck
 const createDeck = () => {
@@ -96,12 +98,25 @@ console.log(val);
 // Events
 // -> A function that is being passed as an argument is known as "callback"
 btnAsk.addEventListener('click', () => {
-    const card = askForCard();
+    const card = askForCard(); // generated card
     console.log(card);
 
     playerPoints = playerPoints + cardValue(card); // the card i generated
     console.log('player points:', playerPoints);
-    pointsHtml[0].innerText = playerPoints;
+    pointsHTML[0].innerText = playerPoints; // access the first <small> element in the HTML with its index (0)
 
     // Create new card every time the player points are calculated to build a deck
+    const imgCard = document.createElement('img');
+    imgCard.src = `assets/cards/${card}.png`;
+    imgCard.classList.add('card');
+    playerCards.append(imgCard);
+
+    // check if player won or lost 
+    if (playerPoints > 21) {
+        console.warn('Sorry loser!');
+        btnAsk.disabled = true;
+    } else if (playerPoints === 21) {
+        console.warn('21! you nailed it');
+    }
+    // deactivate the action buttons
 })
