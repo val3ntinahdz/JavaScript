@@ -10,23 +10,31 @@
     'use strict' // -> enables 'strict' mode in the function only
     
     let deck         = [];
-    const types      = ['C', 'D', 'H', 'S'];
-    const extraCards = ['A', 'J', 'Q', 'K'];
+    const types      = ['C', 'D', 'H', 'S'],
+          extraCards = ['A', 'J', 'Q', 'K']; // unnecessary 'const' initialization
     
-    let playerPoints    = 0,
-        computerPoints  = 0;
+    const playerPoints = 0;
+    const computerPoints = 0;
     
     // HTML references
-    const btnAsk = document.querySelector('#btnAsk');
-    const btnStop = document.querySelector('#btnStop');
-    const btnNew = document.querySelector('#btnNew');
+    const btnAsk = document.querySelector('#btnAsk'),
+          btnStop = document.querySelector('#btnStop'),
+          btnNew = document.querySelector('#btnNew');
     
-    const playerCards   = document.querySelector('#player-cards');
-    const computerCards = document.querySelector('#computer-cards');
-    const pointsHTML    = document.querySelectorAll('small');
-    
+    const playerCards   = document.querySelector('#player-cards'),
+          computerCards = document.querySelector('#computer-cards'),
+          pointsHTML    = document.querySelectorAll('small');
+
+
+    const initializeGame = () => {
+        console.log("Initializing game...");
+        deck = createDeck();
+    }
+
     // This function creates a new deck
     const createDeck = () => {
+        deck = [];
+        
         for(let i = 2; i <= 10; i++) {
             for(let type of types) {
                 deck.push(i + type);
@@ -39,13 +47,8 @@
             }
         }
     
-        // console.log(deck);
-        deck = _.shuffle(deck);
-        console.log(deck);
-        return deck;
+        return _.shuffle(deck);
     }
-    
-    createDeck();
     
     // This function allows the user to ask for a card
     const askForCard = () => {
@@ -53,16 +56,9 @@
             throw 'Deck is empty'; // handle edge cases
         }
     
-        const i = Math.floor(Math.random() * deck.length);
-        const randomCard = deck[i];
-        deck.splice(i, 1); // https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript
-    
-        console.log('Random card:', randomCard);
-        console.log(deck);
-        return randomCard; // return the drawn card
+        return deck.pop(); // remove the last card from the shuffled deck
     }
     
-    askForCard();
     
     const cardValue = (card) => {
         // Substring method reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
@@ -74,7 +70,9 @@
     }
     
     const val = cardValue(askForCard());
-    console.log(val);
+    console.log('card value:', val);
+
+
     
     // COMPUTER'S TURN
     // The computer will ask for cards 
@@ -155,6 +153,19 @@
     })
     
     btnNew.addEventListener('click', () => {
-        window.location.reload();
+        console.clear();
+        initializeGame();
+
+        playerPoints = 0;
+        computerPoints = 0;
+
+        pointsHTML[0].innerText = 0;
+        pointsHTML[1].innerText = 0;
+
+        computerCards.innerHTML = '';
+        playerCards.innerHTML = '';
+
+        btnAsk.disabled = false;
+        btnStop.disabled = false;
     })
 })();
