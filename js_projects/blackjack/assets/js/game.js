@@ -14,22 +14,27 @@
     const types      = ['C', 'D', 'H', 'S'],
           extraCards = ['A', 'J', 'Q', 'K']; // unnecessary 'const' initialization
     
-    let playerPoints = 0;
-    let computerPoints = 0;
+
+    let playerPoints = []; // each position of the array belongs to one player (human & computer)
     
     // HTML references
     const btnAsk = document.querySelector('#btnAsk'),
           btnStop = document.querySelector('#btnStop'),
           btnNew = document.querySelector('#btnNew');
     
-    const playerCards   = document.querySelector('#player-cards'),
-    computerCards = document.querySelector('#computer-cards'),
+    const divPlayerCards = document.querySelectorAll('.divCards'),
           pointsHTML    = document.querySelectorAll('small');
 
 
-    const initializeGame = () => {
+    const initializeGame = (playersNum = 1) => {
         console.log("Initializing game...");
         deck = createDeck();
+
+        for(let i = 0; i < playerPoints; i++) {
+            playerPoints.push(0);
+        }
+
+        console.log({ playerPoints });
     }
     
     // This function creates a new deck
@@ -48,6 +53,7 @@
             }
         }
         
+        console.log(deck)
         return _.shuffle(deck);
     }
     
@@ -57,7 +63,8 @@
         if (deck.length === 0) {
             throw 'Deck is empty'; // handle edge cases
         }
-    
+
+        
         return deck.pop(); // remove the last card from the shuffled deck
     }
     
@@ -74,6 +81,20 @@
     const val = cardValue(askForCard());
     console.log('card value:', val);
 
+    // turn: 0 = first player, turn: 1 = computer
+    const sumPoints = (card, turn) => {
+        playerPoints[turn] = playerPoints + cardValue(card);
+        pointsHTML[turn].innerText = playerPoints[turn];
+        return playerPoints[turn];
+    }
+
+    // Create new card every time the player points are calculated to build a deck
+    const createCard = (card, turn) => {
+        const imgCard = document.createElement('img');
+        imgCard.src = `assets/cards/${card}.png`;
+        imgCard.classList.add('card');
+        divPlayerCards[turn].append(imgCard); // make the card img attachment dynamic depending on the turn (human or computer)
+    }
 
     
     // COMPUTER'S TURN
@@ -83,16 +104,11 @@
     
             const card = askForCard(); // generated card
             console.log(card);
-    
-            computerPoints = computerPoints + cardValue(card); // the card i generated
-            console.log('computer points:', computerPoints);
-            pointsHTML[1].innerText = computerPoints; // access the first <small> element in the HTML with its index (0)
-    
-            // Create new card every time the player points are calculated to build a deck
-            const imgCard = document.createElement('img');
-            imgCard.src = `assets/cards/${card}.png`;
-            imgCard.classList.add('card');
-            computerCards.append(imgCard);
+
+            const computerIdx = playerPoints.length - 1;
+            sumPoints(card, computerIdx);
+
+            createCard(card, computerIdx); // 1
     
             if (minimumPoints > 21) {
                 break;
@@ -123,15 +139,11 @@
         const card = askForCard(); // generated card
         console.log(card);
     
-        playerPoints = playerPoints + cardValue(card); // the card i generated
-        console.log('player points:', playerPoints);
-        pointsHTML[0].innerText = playerPoints; // access the first <small> element in the HTML with its index (0)
+        sumPoints(card, 0);
     
         // Create new card every time the player points are calculated to build a deck
-        const imgCard = document.createElement('img');
-        imgCard.src = `assets/cards/${card}.png`;
-        imgCard.classList.add('card');
-        playerCards.append(imgCard);
+        createCard(card, 0);
+        
     
         // check if player won or lost 
         if (playerPoints > 21) {
@@ -158,8 +170,8 @@
         console.clear();
         initializeGame();
 
-        playerPoints = 0;
-        computerPoints = 0;
+        // playerPoints = 0;
+        // computerPoints = 0;
 
         pointsHTML[0].innerText = 0;
         pointsHTML[1].innerText = 0;
