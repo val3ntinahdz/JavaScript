@@ -5,9 +5,7 @@
  * 2S = Two of spades
  */
 
-
-
-(() => {
+const myModule = (() => {
     'use strict' // -> enables 'strict' mode in the function only
     
     let deck         = [];
@@ -31,12 +29,18 @@
         deck = createDeck();
 
 
-        // playerPoints = [];
+        playerPoints = [];
+
+        // this 'for' loop will assign 0 values to each player in the array
         for(let i = 0; i < playersNum; i++) {
             playerPoints.push(0);
         }
 
-        console.log({ playerPoints });
+        pointsHTML.forEach(e => e.innerText = 0);
+        divPlayerCards.forEach(e => e.innerHTML = '');
+
+        btnAsk.disabled = false;
+        btnStop.disabled = false;
     }
 
     
@@ -84,7 +88,7 @@
 
     // turn: 0 = first player, turn: 1 = computer
     const sumPoints = (card, turn) => {
-        playerPoints[turn] =  playerPoints[turn] + cardValue(card);
+        playerPoints[turn] += cardValue(card);
         pointsHTML[turn].innerText = playerPoints[turn];
         return playerPoints[turn];
     }
@@ -97,30 +101,11 @@
         divPlayerCards[turn].append(imgCard); // make the card img attachment dynamic depending on the turn (human or computer)
     }
     
-    
-    // COMPUTER'S TURN
-    // The computer will ask for cards 
-    const computerTurn = (minimumPoints) => {
-        do {
-    
-            const card = askForCard(); // generated card
-            console.log(card);
-
-            const computerIdx = playerPoints.length - 1;
-            sumPoints(card, computerIdx);
-            createCard(card, computerIdx); // 1
-
-    
-            if (minimumPoints > 21) {
-                break;
-            }
-        
-    
-        } while ((playerPoints[computerIdx] < minimumPoints) && (minimumPoints <= 21));
-    
+    const determineWinner = () => {
+        // array destructuring 
+         const [minimumPoints, computerPoints] = playerPoints;
+         
         setTimeout(() => {
-            const computerPoints = playerPoints[computerIdx];
-
             if (computerPoints > 21) {
                 alert("Congrats player! You've earned an esquite");
             } else if (minimumPoints > 21) {
@@ -131,54 +116,56 @@
                 alert("Computer won!")
             }
         }, 10);
-    
     }
     
-    // When we work with an element multiple times, it is recommended to create a variable for it
+    // COMPUTER'S TURN
+    // The computer will ask for cards 
+    const computerTurn = (minimumPoints) => {
+        let computerIdx = playerPoints.length - 1;
+
+        do {
+            const card = askForCard(); // generated card
+            sumPoints(card, computerIdx);
+            createCard(card, computerIdx); // 1
+        } while (playerPoints[computerIdx] < minimumPoints);
+
+        determineWinner();
+    }
     
     // Events
     // -> A function that is being passed as an argument is known as "callback"
     btnAsk.addEventListener('click', () => {
         const card = askForCard(); // generated card
-        console.log(card);
     
         sumPoints(card, 0);
-    
         // Create new card every time the player points are calculated to build a deck
         createCard(card, 0);
-        
     
         // check if player won or lost 
         if (playerPoints[0] > 21) {
             console.warn('Sorry loser!');
             btnAsk.disabled = true; // deactivate the action buttons once the player has reached more than 21 points
             btnStop.disabled = true; 
-            
-            computerTurn(playerPoints[1]);
+            computerTurn(playerPoints[0]); // pass as an argument the player's points
             
         } else if (playerPoints[0] === 21) {
             console.warn('21! you nailed it');
-            computerTurn(playerPoints[1]);
+            computerTurn(playerPoints[0]);
         }
     });
-    
 
     btnStop.addEventListener('click', () => {
         btnStop.disabled = true;
         btnAsk.disabled = true;
     
-        computerTurn(playerPoints[1]); // shoot the computer turn now and compare points!
+        computerTurn(playerPoints[0]); // shoot the computer turn now and compare points!
     })
     
     btnNew.addEventListener('click', () => {
-        console.clear();
         initializeGame();
-
-        pointsHTML[0].innerText = 0;
-        pointsHTML[1].innerText = 0;
-
-        btnAsk.disabled = false;
-        btnStop.disabled = false;
     })
 
+    return {
+        newGame: initializeGame
+    };
 })();
