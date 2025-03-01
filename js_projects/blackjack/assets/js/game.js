@@ -6,6 +6,7 @@
  */
 
 
+
 (() => {
     'use strict' // -> enables 'strict' mode in the function only
     
@@ -13,8 +14,8 @@
     const types      = ['C', 'D', 'H', 'S'],
           extraCards = ['A', 'J', 'Q', 'K']; // unnecessary 'const' initialization
     
-    const playerPoints = 0;
-    const computerPoints = 0;
+    let playerPoints = 0;
+    let computerPoints = 0;
     
     // HTML references
     const btnAsk = document.querySelector('#btnAsk'),
@@ -22,7 +23,7 @@
           btnNew = document.querySelector('#btnNew');
     
     const playerCards   = document.querySelector('#player-cards'),
-          computerCards = document.querySelector('#computer-cards'),
+    computerCards = document.querySelector('#computer-cards'),
           pointsHTML    = document.querySelectorAll('small');
 
 
@@ -30,7 +31,7 @@
         console.log("Initializing game...");
         deck = createDeck();
     }
-
+    
     // This function creates a new deck
     const createDeck = () => {
         deck = [];
@@ -46,10 +47,11 @@
                 deck.push(card + type);
             }
         }
-    
+        
         return _.shuffle(deck);
     }
     
+    initializeGame();
     // This function allows the user to ask for a card
     const askForCard = () => {
         if (deck.length === 0) {
