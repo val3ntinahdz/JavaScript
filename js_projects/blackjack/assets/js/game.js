@@ -26,16 +26,19 @@
           pointsHTML    = document.querySelectorAll('small');
 
 
-    const initializeGame = (playersNum = 1) => {
+    const initializeGame = (playersNum = 2) => {
         console.log("Initializing game...");
         deck = createDeck();
 
-        for(let i = 0; i < playerPoints; i++) {
+
+        // playerPoints = [];
+        for(let i = 0; i < playersNum; i++) {
             playerPoints.push(0);
         }
 
         console.log({ playerPoints });
     }
+
     
     // This function creates a new deck
     const createDeck = () => {
@@ -56,8 +59,9 @@
         console.log(deck)
         return _.shuffle(deck);
     }
-    
+
     initializeGame();
+    
     // This function allows the user to ask for a card
     const askForCard = () => {
         if (deck.length === 0) {
@@ -72,10 +76,7 @@
     const cardValue = (card) => {
         // Substring method reference -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
         const val = card.substring(0, card.length - 1); // extract the card value
-    
-        return (isNaN(val)) ?
-               (val === 'A') ? 11 : 10
-               : val * 1;
+        return (isNaN(val)) ? (val === 'A') ? 11 : 10 : val * 1;
     }
     
     const val = cardValue(askForCard());
@@ -83,11 +84,11 @@
 
     // turn: 0 = first player, turn: 1 = computer
     const sumPoints = (card, turn) => {
-        playerPoints[turn] = playerPoints + cardValue(card);
+        playerPoints[turn] =  playerPoints[turn] + cardValue(card);
         pointsHTML[turn].innerText = playerPoints[turn];
         return playerPoints[turn];
     }
-
+    
     // Create new card every time the player points are calculated to build a deck
     const createCard = (card, turn) => {
         const imgCard = document.createElement('img');
@@ -95,7 +96,7 @@
         imgCard.classList.add('card');
         divPlayerCards[turn].append(imgCard); // make the card img attachment dynamic depending on the turn (human or computer)
     }
-
+    
     
     // COMPUTER'S TURN
     // The computer will ask for cards 
@@ -107,17 +108,19 @@
 
             const computerIdx = playerPoints.length - 1;
             sumPoints(card, computerIdx);
-
             createCard(card, computerIdx); // 1
+
     
             if (minimumPoints > 21) {
                 break;
             }
         
     
-        } while ((computerPoints < minimumPoints) && (minimumPoints <= 21));
+        } while ((playerPoints[computerIdx] < minimumPoints) && (minimumPoints <= 21));
     
         setTimeout(() => {
+            const computerPoints = playerPoints[computerIdx];
+
             if (computerPoints > 21) {
                 alert("Congrats player! You've earned an esquite");
             } else if (minimumPoints > 21) {
@@ -146,40 +149,36 @@
         
     
         // check if player won or lost 
-        if (playerPoints > 21) {
+        if (playerPoints[0] > 21) {
             console.warn('Sorry loser!');
             btnAsk.disabled = true; // deactivate the action buttons once the player has reached more than 21 points
             btnStop.disabled = true; 
             
-            computerTurn(playerPoints);
+            computerTurn(playerPoints[1]);
             
-        } else if (playerPoints === 21) {
+        } else if (playerPoints[0] === 21) {
             console.warn('21! you nailed it');
-            computerTurn(playerPoints);
+            computerTurn(playerPoints[1]);
         }
     });
     
+
     btnStop.addEventListener('click', () => {
         btnStop.disabled = true;
         btnAsk.disabled = true;
     
-        computerTurn(playerPoints); // shoot the computer turn now and compare points!
+        computerTurn(playerPoints[1]); // shoot the computer turn now and compare points!
     })
     
     btnNew.addEventListener('click', () => {
         console.clear();
         initializeGame();
 
-        // playerPoints = 0;
-        // computerPoints = 0;
-
         pointsHTML[0].innerText = 0;
         pointsHTML[1].innerText = 0;
-
-        computerCards.innerHTML = '';
-        playerCards.innerHTML = '';
 
         btnAsk.disabled = false;
         btnStop.disabled = false;
     })
+
 })();
