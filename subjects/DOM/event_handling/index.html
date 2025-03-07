@@ -8,8 +8,31 @@
 <body>
     <h1>Event Handling Example</h1>
 
-    <!-- handler assignation via HTML attribute
-    <input value="Click me" onclick="alert('Click!')" type="button">  -->
+    <!-- handler assignation via HTML attribute -->
+    <input id="btn" value="Click me" type="button">
+    <!-- <script>
+        btn.onclick = function() {
+            alert('you clicked!');
+        }
+    </script> -->
+
+    <script>
+        function countFlowers() {
+            for(let i = 0; i <= 3; i++) {
+                alert(`flower: ${i}`);
+
+                (i === 3) ? alert('my favorite flower!') : alert('not the 3rd one yet!');
+            }
+        }
+
+        document.getElementById("btn").addEventListener("click", countFlowers); // Here, we pass the assignment the function without () because 
+        // it is already called when we execute the event
+        // it creates something like this: 
+        // button.onclick = function() {
+        //    countFlowers(); 
+        // }
+        
+    </script>
     <button>Don't click me! DO NOT</button>
     <script src="script.js"></script>
 </body>
