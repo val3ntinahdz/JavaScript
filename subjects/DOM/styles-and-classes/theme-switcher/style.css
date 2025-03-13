@@ -1,0 +1,38 @@
+body {
+    margin: 100px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    transition: background 0.5s, color 0.5s;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: white;
+}
+
+.blue-theme {
+    background-color: #007bff;
+    color: white;
+}
+
+.green-theme {
+    background-color: #28a745;
+    color: white;
+}
+
+.red-theme {
+    background-color: #dc3545;
+    color: white;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+select {
+    margin-top: 10px;
+    padding: 5px;
+}
