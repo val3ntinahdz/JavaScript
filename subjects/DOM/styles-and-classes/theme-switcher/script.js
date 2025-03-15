@@ -11,19 +11,24 @@ function changeBackgroundColor(event) {
 
 themeSelector.addEventListener("change", changeBackgroundColor);
 
-document.body.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme") || "default";
+
+const toggleButton = document.getElementById('toggle-theme');
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
     document.body.classList.add(savedTheme);
     themeSelector.value = savedTheme;
 });
 
-
-const toggleButton = document.getElementById('toggle-theme');
-
 function toggleBackgroundColor() {
-    document.body.classList.remove("toggle-theme");
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("theme", "dark-mode");
+    const lastClassApplied = [...document.body.classList].find((cls) => cls.includes("-theme"));
+    if(document.body.classList.contains("dark-mode")) {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("theme", lastClassApplied || "default");
+    } else {
+        document.body.classList.remove(lastClassApplied);
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark-mode");
+    }
 }
 
 toggleButton.addEventListener("click", toggleBackgroundColor);
