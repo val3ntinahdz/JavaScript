@@ -1,0 +1,2 @@
+## What is Event Delegation?
+Event delegation is one of the most common event handling patterns. The idea behind is simple: it is useful when we have several elements that use the same behavior. Instead of attaching a handler to each one of them, we put a single handler on their common ancestor.
