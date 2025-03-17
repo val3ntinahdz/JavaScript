@@ -15,3 +15,5 @@ If you click on the <p> element, the event will "bubble up," triggering the foll
 1. p
 2. div
 3. form
+
+# What is Capturing?

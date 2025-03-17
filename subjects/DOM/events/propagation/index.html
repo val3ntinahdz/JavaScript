@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling and Capturing</title>
+    <style>
+        .container {
+            padding: 20px;
+            border: 2px solid black;
+        }
+        .parent {
+            padding: 20px;
+            border: 2px solid red;
+        }
+        .child {
+            padding: 20px;
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        Container
+        <div class="parent">
+            Parent
+            <div class="child">
+                Child
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
