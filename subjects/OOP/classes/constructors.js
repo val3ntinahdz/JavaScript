@@ -12,5 +12,5 @@ const teresa = new Persona('Teresa', 70);
 console.log(teresa);
 
 
-// in past ES6 versions,an alternative had to be implemented in order to create
+// in past ES6 versions, an alternative had to be implemented in order to create
 // objects containing the same heritage and the same methods. This way, new instances could be created. 
