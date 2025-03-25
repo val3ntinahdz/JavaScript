@@ -21,20 +21,26 @@ class Person {
     name = '';
     code = '';
     phrase = '';
+    food = '';
     
     // It is valid to define default values for arguments.
-    constructor(name = 'no name', code = 'no code', phrase = 'no phrase') {
+    constructor(name, code, phrase, food) {
         this.code = code;
         this.name = name;
         this.phrase = phrase;
     }
 
-    // Method to print the identity of the person.
+
+    // In classes,we
+    set setFavoriteFood(food) {
+        this.food = food;
+    }
+    
     whoAmI() {
         console.log(`I am ${this.name} and my identity is ${this.code}`);
     }
 
-    // Method to print the phrase of the person.
+  
     myPhrase() {
         // Calls the whoAmI method to print the identity first.
         this.whoAmI();
