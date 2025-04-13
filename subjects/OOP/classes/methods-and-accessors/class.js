@@ -31,7 +31,13 @@ class Person {
     }
 
 
-    // In classes,we
+    // In classes, we can define getters and setters.
+    // Getters are used to access properties of the class.
+    get getName() {
+        return this.name;
+    }
+    
+    // Setters are used to modify properties of the class.
     set setFavoriteFood(food) {
         this.food = food;
     }
@@ -64,3 +70,6 @@ alert(Object.getOwnPropertyNames(Person.prototype)); // ["constructor", "whoAmI"
 
 // Calling the myPhrase method on the spiderman instance.
 spiderman.myPhrase();
+
+spiderman.setFavoriteFood = 'Aunt May\'s cookies';
+console.log(spiderman.food); // -> Aunt May's cookies
