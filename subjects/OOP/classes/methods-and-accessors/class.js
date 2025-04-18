@@ -34,7 +34,7 @@ class Person {
     // In classes, we can define getters and setters.
     // Getters are used to access properties of the class.
     get getName() {
-        return this.name;
+        return this.name; // you can see the name of the person by calling this method.
     }
     
     // Setters are used to modify properties of the class.
@@ -58,10 +58,12 @@ class Person {
 // Creating instances of the Person class.
 const spiderman = new Person('Peter Parker', 'Spiderman', 'I am your lovely friend spiderman');
 const ironman = new Person('Tony Stark', 'IronMan', 'I am ironman');
+const valentina = new Person('Valentina', 'Black Widow', 'I am black widow');
 
 // Logging the instances to the console.
 console.log(spiderman);
 console.log(ironman);
+console.log(valentina);
 
 // Checking the type and properties of the Person class.
 alert(typeof Person); // -> function
@@ -71,6 +73,9 @@ alert(Object.getOwnPropertyNames(Person.prototype)); // ["constructor", "whoAmI"
 // Calling the myPhrase method on the spiderman instance.
 spiderman.myPhrase();
 
+valentina.setFavoriteFood = 'Pasta';
+console.log("Valentina's favorite food is:", valentina.food); // -> Pasta
+// Calling the getName getter method on the spiderman instance.      
+console.log(spiderman.getName); // -> Peter Parker
 spiderman.setFavoriteFood = 'Aunt May\'s cookies';
 console.log(spiderman.food); // -> Aunt May's cookies
-// this is a test for github
