@@ -16,6 +16,11 @@
 // 1. Creates a function named 'Person', which is the class declaration.
 // 2. It stores class methods, which can be the constructor and custom methods.
 class Person {
+    static _count = 0;
+    static get count() {
+        return Person._count + "instances of Person class";
+    }
+
     // The constructor method is executed right when a new instance is created.
     // It is also the only method that does not return 'undefined' but an object.
     name = '';
@@ -29,7 +34,6 @@ class Person {
         this.name = name;
         this.phrase = phrase;
     }
-
 
     // In classes, we can define getters and setters.
     // Getters are used to access properties of the class.
