@@ -1,7 +1,10 @@
 import _ from 'underscore';
 
-// the 
-export const crearDeck = (tiposDeCarta, tiposEspeciales) => {
+export const myName = "Valentina";
+
+// the "export" keyword labels variables or functions to make them available outside the current module.
+const crearDeck = (tiposDeCarta, tiposEspeciales) => {
+    let deck = []; // initialize deck
 
     for( let i = 2; i <= 10; i++ ) {
         for( let tipo of tiposDeCarta ) {
@@ -19,3 +22,5 @@ export const crearDeck = (tiposDeCarta, tiposEspeciales) => {
     console.log( deck );
     return deck;
 }
+
+export default crearDeck;
