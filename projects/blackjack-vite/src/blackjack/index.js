@@ -1,10 +1,7 @@
 import _ from 'underscore';
 
 // the "Import" keyword let us call functionality from other modules (variables or functions).
-import crearDeck from './usecases/create-deck';
-import pedirCarta from './usecases/ask-card';
-import valorCarta from './usecases/card-value';
-
+import { crearDeck, pedirCarta, valorCarta } from './usecases';
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diamonds
