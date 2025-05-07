@@ -2,6 +2,8 @@ import _ from 'underscore';
 
 // the "Import" keyword let us call functionality from other modules (variables or functions).
 import crearDeck from './usecases/create-deck';
+import pedirCarta from './usecases/ask-card';
+import valorCarta from './usecases/card-value';
 
 /**
  * 2C = Two of Clubs
@@ -31,31 +33,19 @@ const puntosHTML = document.querySelectorAll('small');
 deck = crearDeck(tipos, especiales);
 console.log(deck);
 
-
-// Esta función me permite tomar una carta
-const pedirCarta = () => {
-
-    if ( deck.length === 0 ) {
-        throw 'No hay cartas en el deck';
-    }
-    const carta = deck.pop();
-    return carta;
-}
-
 // pedirCarta();
-const valorCarta = ( carta ) => {
+const carta = pedirCarta(deck);
+console.log("Carta pedida:", carta);
 
-    const valor = carta.substring(0, carta.length - 1);
-    return ( isNaN( valor ) ) ? 
-            ( valor === 'A' ) ? 11 : 10
-            : valor * 1;
-}
+// valorCarta();
+const cardValue = valorCarta(carta);
+console.log("card value:", cardValue);
 
 // turno de la computadora
 const turnoComputadora = ( puntosMinimos ) => {
 
     do {
-        const carta = pedirCarta();
+        const carta = pedirCarta(deck);
 
         puntosComputadora = puntosComputadora + valorCarta( carta );
         puntosHTML[1].innerText = puntosComputadora;
@@ -90,7 +80,7 @@ const turnoComputadora = ( puntosMinimos ) => {
 // Eventos
 btnPedir.addEventListener('click', () => {
 
-    const carta = pedirCarta();
+    const carta = pedirCarta(deck);
     
     puntosJugador = puntosJugador + valorCarta( carta );
     puntosHTML[0].innerText = puntosJugador;
@@ -128,7 +118,7 @@ btnNuevo.addEventListener('click', () => {
 
     console.clear();
     deck = [];
-    deck = crearDeck();
+    deck = crearDeck(tipos, especiales);
 
     puntosJugador     = 0;
     puntosComputadora = 0;
