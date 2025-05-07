@@ -1,8 +1,7 @@
 import _ from 'underscore';
 
 // the "Import" keyword let us call functionality from other modules (variables or functions).
-import crearDeck, { myName } from './usecases/create-deck';
-console.log(myName);
+import crearDeck from './usecases/create-deck';
 
 /**
  * 2C = Two of Clubs
@@ -30,6 +29,7 @@ const puntosHTML = document.querySelectorAll('small');
 
 // this module equals the returned value in "crearDeck" function
 deck = crearDeck(tipos, especiales);
+console.log(deck);
 
 
 // Esta función me permite tomar una carta
