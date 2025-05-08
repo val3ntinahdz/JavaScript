@@ -4,3 +4,4 @@ export { default as valorCarta } from './card-value';
 
 export { turnoComputadora } from './computer-turn';
 export { crearCartaHTML } from './create-card-html';
+export { disableButton } from './disable-button';

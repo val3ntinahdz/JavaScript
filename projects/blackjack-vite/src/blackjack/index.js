@@ -1,7 +1,7 @@
 import _ from 'underscore';
 
 // the "Import" keyword let us call functionality from other modules (variables or functions).
-import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML } from './usecases';
+import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML, disableButton } from './usecases';
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diamonds
@@ -53,14 +53,12 @@ btnPedir.addEventListener('click', () => {
 
     if ( puntosJugador > 21 ) {
         console.warn('Lo siento mucho, perdiste');
-        btnPedir.disabled   = true;
-        btnDetener.disabled = true;
+        disableButton(btnPedir, btnDetener);
         turnoComputadora( puntosJugador, puntosHTML[1], divCartasComputadora, deck);
 
     } else if ( puntosJugador === 21 ) {
         console.warn('21, genial!');
-        btnPedir.disabled   = true;
-        btnDetener.disabled = true;
+        disableButton(btnPedir, btnDetener);
         turnoComputadora( puntosJugador, puntosHTML[1], divCartasComputadora, deck);
     }
 
@@ -68,9 +66,7 @@ btnPedir.addEventListener('click', () => {
 
 
 btnDetener.addEventListener('click', () => {
-    btnPedir.disabled   = true;
-    btnDetener.disabled = true;
-
+    disableButton(btnPedir, btnDetener);
     turnoComputadora( puntosJugador, puntosHTML[1], divCartasComputadora, deck);
 });
 
