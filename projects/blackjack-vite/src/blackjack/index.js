@@ -1,7 +1,7 @@
 import _ from 'underscore';
 
 // the "Import" keyword let us call functionality from other modules (variables or functions).
-import { crearDeck, pedirCarta, valorCarta, turnoComputadora } from './usecases';
+import { crearDeck, pedirCarta, valorCarta, turnoComputadora, crearCartaHTML } from './usecases';
 /**
  * 2C = Two of Clubs
  * 2D = Two of Diamonds
@@ -48,9 +48,7 @@ btnPedir.addEventListener('click', () => {
     puntosHTML[0].innerText = puntosJugador;
     
     // <img class="carta" src="assets/cartas/2C.png">
-    const imgCarta = document.createElement('img');
-    imgCarta.src = `assets/cartas/${ carta }.png`; //3H, JD
-    imgCarta.classList.add('carta');
+    const imgCarta = crearCartaHTML(carta);
     divCartasJugador.append( imgCarta );
 
     if ( puntosJugador > 21 ) {
