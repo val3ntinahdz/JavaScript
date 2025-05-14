@@ -1,4 +1,4 @@
-import html from './app.html?raw';
+import html from './app.html?raw'; // https://stackoverflow.com/questions/67330947/vite-cannot-handle-xxx-html-files
 /**
  * 
  * @param {String} elementId 
