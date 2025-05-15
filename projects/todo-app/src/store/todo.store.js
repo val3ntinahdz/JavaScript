@@ -7,6 +7,10 @@ const Filters = {
     Pending: 'Pending'
 }
 
+// const generateIDS = () => {
+//     this.id += 1;
+// }
+
 
 
 const state = {
