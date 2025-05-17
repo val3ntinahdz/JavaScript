@@ -1,17 +1,13 @@
 // The global state of my app
 import { Todo } from "../todos/models/todo.model";
 
+// Using an Enum here. It refers to a special class that represents a group of constants (unchangeable variables)
+// https://www.geeksforgeeks.org/enums-in-javascript/
 const Filters = {
     All: 'All',
     Completed: 'Completed',
     Pending: 'Pending'
 }
-
-// const generateIDS = () => {
-//     this.id += 1;
-// }
-
-
 
 const state = {
     todos: [
@@ -50,17 +46,31 @@ const addTodo = (description) => {
     state.todos.push(new Todo(description));
 }
 
-const toggleTodo = () => {
-    throw new Error('Not implemented');
+const toggleTodo = (todoId) => {
+    state.todos = state.todos.map(todo => {
+        if (todo.id === todoId) {
+            return {...todo, done: !todo.done}; // -> new modified copy
+        }
+
+        return todo;
+    })
 }
 
 const deleteTodo = (todoId) => {
     state.todos = state.todos.filter(todo => todo.id !== todoId);
 }
 
+const deleteCompleted = () => {
+    state.todos = state.todos.filter(todo => !todo.done);
+}
+
 const newFilter = Filters.All;
 const setSelectedFilter = (newFilter) => {
-    state.filter = newFilter;
+    if (Object.values(Filters).includes(newFilter)) {
+        state.filter = newFilter;
+    } else {
+        throw new Error("Invalid filter.");
+    }
 }
 
 const getCurrentFilter = () => {
@@ -74,6 +84,7 @@ export default {
     addTodo,
     toggleTodo,
     deleteTodo,
+    deleteCompleted,
     setSelectedFilter,
     getCurrentFilter,
 }
