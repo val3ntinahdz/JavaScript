@@ -3,6 +3,11 @@ import { createTodoHTML } from "./create-todo-html";
 
 let element;
 
+/**
+ * 
+ * @param {String} elementId 
+ * @param {Todo} todos 
+ */
 export const renderTodos = (elementId, todos = []) => {
     if (!element)
         element = document.querySelector(elementId); // .todo-list div in HTML

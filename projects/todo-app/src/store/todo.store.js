@@ -49,7 +49,7 @@ const addTodo = (description) => {
 const toggleTodo = (todoId) => {
     state.todos = state.todos.map(todo => {
         if (todo.id === todoId) {
-            return {...todo, done: !todo.done}; // -> new modified copy
+            todo.done = !todo.done;
         }
 
         return todo;
