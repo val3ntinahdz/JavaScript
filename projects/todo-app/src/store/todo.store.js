@@ -64,8 +64,7 @@ const deleteCompleted = () => {
     state.todos = state.todos.filter(todo => !todo.done);
 }
 
-const newFilter = Filters.All;
-const setSelectedFilter = (newFilter) => {
+const setSelectedFilter = (newFilter = Filters.All) => {
     if (Object.values(Filters).includes(newFilter)) {
         state.filter = newFilter;
     } else {

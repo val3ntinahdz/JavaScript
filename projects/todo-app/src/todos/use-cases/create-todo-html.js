@@ -22,7 +22,7 @@ export const createTodoHTML = (todo) => {
     liElement.setAttribute('data-id', id);
 
     if (todo.done)
-        liElement.classList.add('Completed');
+        liElement.classList.add('completed');
 
     return liElement;
 

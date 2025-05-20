@@ -35,7 +35,10 @@ export const App = (elementId) => {
     // Listeners
     // The keyup event in JavaScript is triggered when a user releases a key on the keyboard. 
     newDescriptionInput.addEventListener('keyup', (event) => {
-        if (event.keyCode !== 13) return; // unless another key is pressed
+        if (event.keyCode !== 13) return; // unless another key is pressed, the code keeps executing
+
+        // The trim() method in JavaScript is used to remove whitespace characters (spaces, tabs, and newlines) from both the beginning and the end of a string, 
+        // returning a new string without modifying the original. 
         if (event.target.value.trim().length === 0) return; // the function continues only if there's a value in the event.target.value
 
         todoStore.addTodo(event.target.value);
@@ -46,7 +49,7 @@ export const App = (elementId) => {
 
     todoListUL.addEventListener('click', (event) => {
         // event.target points to the element the event is being listened from. 
-        const element = event.target.closest('[data-id]'); // 
+        const element = event.target.closest('[data-id]'); // This line search for the nearest parent containing the "data-id" html attribute
 
         // MDN docs says > The closest() method of the Element interface traverses the element and its parents (heading toward the document root) until it finds a node that matches the specified CSS selector.
         // check the docs for more info > https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
