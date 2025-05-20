@@ -20,12 +20,24 @@ const state = {
 
 // this function is going to call the data saved in localStorage
 const initializeStore = () => {
+    loadStore();
     console.log(state);
     console.log('Init store');
 }
 
 const loadStore = () => {
-    throw new Error('Not implemented');
+    const savedState = localStorage.getItem('state');
+    if (savedState) {
+        const { todos = [], filter = Filters.All } = JSON.parse(savedState);
+        state.todos = todos;
+        state.filter = filter;
+    }
+}
+
+const saveStateToLocalStorage = () => {
+    // To save an entire JavaScript object to local storage, it's necessary to first serialize it into a string using JSON.stringify()
+    // Local storage can only store string values
+    localStorage.setItem('state', JSON.stringify(state));
 }
 
 const getTodos = (filter = Filters.All) => {
@@ -44,6 +56,8 @@ const getTodos = (filter = Filters.All) => {
 const addTodo = (description) => {
     if (!description) throw new Error("The description is required!");
     state.todos.push(new Todo(description));
+
+    saveStateToLocalStorage();
 }
 
 const toggleTodo = (todoId) => {
@@ -54,14 +68,18 @@ const toggleTodo = (todoId) => {
 
         return todo;
     })
+
+    saveStateToLocalStorage();
 }
 
 const deleteTodo = (todoId) => {
     state.todos = state.todos.filter(todo => todo.id !== todoId);
+    saveStateToLocalStorage();
 }
 
 const deleteCompleted = () => {
     state.todos = state.todos.filter(todo => !todo.done);
+    saveStateToLocalStorage();
 }
 
 const setSelectedFilter = (newFilter = Filters.All) => {
@@ -70,6 +88,8 @@ const setSelectedFilter = (newFilter = Filters.All) => {
     } else {
         throw new Error("Invalid filter.");
     }
+
+    saveStateToLocalStorage();
 }
 
 const getCurrentFilter = () => {

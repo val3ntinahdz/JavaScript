@@ -56,4 +56,18 @@ export const App = (elementId) => {
         todoStore.toggleTodo(element.getAttribute('data-id')); // extract the todo id
         displayTodos();
     })
+
+
+    // delete a todo
+    todoListUL.addEventListener('click', (event) => {
+       console.log(event.target); // <buton class="destroy"></button>
+       const isDestroyElement = event.target.className === "destroy";
+       const element = event.target.closest('[data-id]');
+    //    console.log({isDestroyElement});
+
+       if (!element || !isDestroyElement) return;
+
+       todoStore.deleteTodo(element.getAttribute('data-id'));
+       displayTodos();
+    })
 }

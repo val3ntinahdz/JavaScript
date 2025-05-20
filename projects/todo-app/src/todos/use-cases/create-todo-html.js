@@ -21,7 +21,8 @@ export const createTodoHTML = (todo) => {
     liElement.innerHTML = html;
     liElement.setAttribute('data-id', id);
 
-    if (todo.done)
+    // if we check the todo, the "completed" class is added to our li element
+    if (done)
         liElement.classList.add('completed');
 
     return liElement;
