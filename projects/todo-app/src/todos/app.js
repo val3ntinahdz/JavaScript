@@ -22,9 +22,11 @@ export const App = (elementId) => {
 
     const updatePendingCount = () => {
         const todosPending = todoStore.getTodos(Filters.Pending);
-        // console.log(todosPending.length);
-        document.querySelector(ElementIds.PendingCountSpan).innerHTML = todosPending.length;
-        displayTodos();
+        const pendingCountSpan = document.querySelector(ElementIds.PendingCountSpan);
+
+        if (pendingCountSpan) {
+            pendingCountSpan.textContent = todosPending.length;
+        }
     }
 
 
@@ -83,16 +85,17 @@ export const App = (elementId) => {
 
        todoStore.deleteTodo(element.getAttribute('data-id'));
        displayTodos();
+       updatePendingCount();
     })
 
     // delete all the completed tasks
     deleteCompletedButton.addEventListener('click', () => {
         todoStore.deleteCompleted();
         displayTodos();
+        updatePendingCount();
     })
 
     // change filters
-
     filters.forEach(element => {
         element.addEventListener('click', (elem) => {
             filters.forEach(el => el.classList.remove('selected')); // to remove the 'selected' attribute before adding it.
