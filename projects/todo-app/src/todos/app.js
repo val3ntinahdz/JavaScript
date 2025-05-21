@@ -74,15 +74,18 @@ export const App = (elementId) => {
     })
 
     // delete all the completed tasks
-    deleteCompletedButton.addEventListener('click', (event) => {
+    deleteCompletedButton.addEventListener('click', () => {
         // pseudocode. what needs to be done before deleting all the tasks with the class "completed"?
         // get the "borrar completados" button id or class
         // get all the tasks containing the 'checked' attribute through a query selector
-        const checkedElements = document.querySelectorAll('[checked]');
-        console.log(checkedElements);
+        // const checkedElements = document.querySelectorAll('[checked]');
+        // console.log(checkedElements);
 
-        if (!checkedElements) return;
-        todoStore.deleteCompleted(checkedElements);
+        // if (!checkedElements) return;
+        // todoStore.deleteCompleted(checkedElements);
+        // displayTodos();
+
+        todoStore.deleteCompleted();
         displayTodos();
     })
 }
