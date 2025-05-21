@@ -62,31 +62,27 @@ export const App = (elementId) => {
         event.target.value = '';
     })
 
+
+    // this code handles toggle and task deletion:
     todoListUL.addEventListener('click', (event) => {
-        // event.target points to the element the event is being listened from. 
-        const element = event.target.closest('[data-id]'); // This line search for the nearest parent containing the "data-id" html attribute
 
         // MDN docs says > The closest() method of the Element interface traverses the element and its parents (heading toward the document root) until it finds a node that matches the specified CSS selector.
         // check the docs for more info > https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
-        todoStore.toggleTodo(element.getAttribute('data-id')); // extract the todo id
-        displayTodos();
-        updatePendingCount();
-    })
 
+       // event.target points to the element the event is being listened from. 
+       const element = event.target.closest('[data-id]'); // This line search for the nearest parent containing the "data-id" html attribute
+       if (!element) return;
 
-    // delete a todo
-    todoListUL.addEventListener('click', (event) => {
-       console.log(event.target); // <buton class="destroy"></button>
-       const isDestroyElement = event.target.className === "destroy";
-       const element = event.target.closest('[data-id]');
-    //    console.log({isDestroyElement});
+       if (event.target.classList.contains('destroy')) { // <buton class="destroy"></button>
+        todoStore.deleteTodo(element.getAttribute('data-id'));
+       } else {
+        todoStore.toggleTodo(element.getAttribute('data-id'));
+       }
 
-       if (!element || !isDestroyElement) return;
-
-       todoStore.deleteTodo(element.getAttribute('data-id'));
        displayTodos();
        updatePendingCount();
     })
+    
 
     // delete all the completed tasks
     deleteCompletedButton.addEventListener('click', () => {
