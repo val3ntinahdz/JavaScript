@@ -1,12 +1,13 @@
 import html from './app.html?raw'; // https://stackoverflow.com/questions/67330947/vite-cannot-handle-xxx-html-files
-import todoStore from '../store/todo.store';
-import { Todo } from './models/todo.model';
+import todoStore, { Filters } from '../store/todo.store';
 import { renderTodos } from './use-cases/render-todos';
 
 const ElementIds = {
     TodoList: '.todo-list',
     NewTodoInput: '#new-todo-input',
-    DeleteTasksButton: '.clear-completed'
+    DeleteTasksButton: '.clear-completed',
+    TodoFilters: '.filtro',
+    PendingCountSpan: '#pending-count',
 } 
 /**
  * 
@@ -19,6 +20,13 @@ export const App = (elementId) => {
         renderTodos(ElementIds.TodoList, todos);
     }
 
+    const updatePendingCount = () => {
+        const todosPending = todoStore.getTodos(Filters.Pending);
+        // console.log(todosPending.length);
+        document.querySelector(ElementIds.PendingCountSpan).innerHTML = todosPending.length;
+        displayTodos();
+    }
+
 
     // funcion anonima autoinvocada (sincrona)
     // cuando la funcion app() se llama
@@ -27,12 +35,14 @@ export const App = (elementId) => {
         app.innerHTML = html;
         document.querySelector(elementId).append(app);
         displayTodos();
+        updatePendingCount();
     })();
 
     // HTML references
     const newDescriptionInput = document.querySelector(ElementIds.NewTodoInput);
     const todoListUL = document.querySelector(ElementIds.TodoList);
     const deleteCompletedButton = document.querySelector(ElementIds.DeleteTasksButton)
+    const filters = document.querySelectorAll(ElementIds.TodoFilters);
 
     // Listeners
     // The keyup event in JavaScript is triggered when a user releases a key on the keyboard. 
@@ -45,6 +55,7 @@ export const App = (elementId) => {
 
         todoStore.addTodo(event.target.value);
         displayTodos();
+        updatePendingCount();
         // After appending the new to do and pressing 'enter', the event.target.value will reload
         event.target.value = '';
     })
@@ -57,6 +68,7 @@ export const App = (elementId) => {
         // check the docs for more info > https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
         todoStore.toggleTodo(element.getAttribute('data-id')); // extract the todo id
         displayTodos();
+        updatePendingCount();
     })
 
 
@@ -75,17 +87,31 @@ export const App = (elementId) => {
 
     // delete all the completed tasks
     deleteCompletedButton.addEventListener('click', () => {
-        // pseudocode. what needs to be done before deleting all the tasks with the class "completed"?
-        // get the "borrar completados" button id or class
-        // get all the tasks containing the 'checked' attribute through a query selector
-        // const checkedElements = document.querySelectorAll('[checked]');
-        // console.log(checkedElements);
-
-        // if (!checkedElements) return;
-        // todoStore.deleteCompleted(checkedElements);
-        // displayTodos();
-
         todoStore.deleteCompleted();
         displayTodos();
     })
+
+    // change filters
+
+    filters.forEach(element => {
+        element.addEventListener('click', (elem) => {
+            filters.forEach(el => el.classList.remove('selected')); // to remove the 'selected' attribute before adding it.
+            elem.target.classList.add('selected');
+
+            switch(elem.target.text) {
+                case 'Todos':
+                    todoStore.setSelectedFilter(Filters.All);
+                break;
+                case 'Pendientes':
+                    todoStore.setSelectedFilter(Filters.Pending);
+                break;
+                case 'Completados':
+                    todoStore.setSelectedFilter(Filters.Completed);
+                break;
+
+            }
+            
+            displayTodos();
+        })
+    });
 }

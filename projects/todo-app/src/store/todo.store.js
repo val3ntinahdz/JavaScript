@@ -3,7 +3,7 @@ import { Todo } from "../todos/models/todo.model";
 
 // Using an Enum here. It refers to a special class that represents a group of constants (unchangeable variables)
 // https://www.geeksforgeeks.org/enums-in-javascript/
-const Filters = {
+export const Filters = {
     All: 'All',
     Completed: 'Completed',
     Pending: 'Pending'
