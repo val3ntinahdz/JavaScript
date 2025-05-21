@@ -6,6 +6,7 @@ import { renderTodos } from './use-cases/render-todos';
 const ElementIds = {
     TodoList: '.todo-list',
     NewTodoInput: '#new-todo-input',
+    DeleteTasksButton: '.clear-completed'
 } 
 /**
  * 
@@ -31,6 +32,7 @@ export const App = (elementId) => {
     // HTML references
     const newDescriptionInput = document.querySelector(ElementIds.NewTodoInput);
     const todoListUL = document.querySelector(ElementIds.TodoList);
+    const deleteCompletedButton = document.querySelector(ElementIds.DeleteTasksButton)
 
     // Listeners
     // The keyup event in JavaScript is triggered when a user releases a key on the keyboard. 
@@ -69,5 +71,18 @@ export const App = (elementId) => {
 
        todoStore.deleteTodo(element.getAttribute('data-id'));
        displayTodos();
+    })
+
+    // delete all the completed tasks
+    deleteCompletedButton.addEventListener('click', (event) => {
+        // pseudocode. what needs to be done before deleting all the tasks with the class "completed"?
+        // get the "borrar completados" button id or class
+        // get all the tasks containing the 'checked' attribute through a query selector
+        const checkedElements = document.querySelectorAll('[checked]');
+        console.log(checkedElements);
+
+        if (!checkedElements) return;
+        todoStore.deleteCompleted(checkedElements);
+        displayTodos();
     })
 }

@@ -26,6 +26,7 @@ const initializeStore = () => {
 }
 
 const loadStore = () => {
+    // Here's a cool article to help you understand localStorage > https://www.freecodecamp.org/espanol/news/como-usar-localstorage-en-javascript
     const savedState = localStorage.getItem('state');
     if (savedState) {
         const { todos = [], filter = Filters.All } = JSON.parse(savedState);
