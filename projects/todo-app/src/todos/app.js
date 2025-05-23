@@ -18,11 +18,12 @@ export const App = (elementId) => {
     const displayTodos = () => {
         const todos = todoStore.getTodos(todoStore.getCurrentFilter());
         renderTodos(ElementIds.TodoList, todos);
+        updatePendingCount(); // always update the pending tasks count in the task table
     }
 
     const updatePendingCount = () => {
-        const todosPending = todoStore.getTodos(Filters.Pending);
         const pendingCountSpan = document.querySelector(ElementIds.PendingCountSpan);
+        const todosPending = todoStore.getTodos(Filters.Pending);
 
         if (pendingCountSpan) {
             pendingCountSpan.textContent = todosPending.length;
@@ -37,7 +38,6 @@ export const App = (elementId) => {
         app.innerHTML = html;
         document.querySelector(elementId).append(app);
         displayTodos();
-        updatePendingCount();
     })();
 
     // HTML references
@@ -57,7 +57,6 @@ export const App = (elementId) => {
 
         todoStore.addTodo(event.target.value);
         displayTodos();
-        updatePendingCount();
         // After appending the new to do and pressing 'enter', the event.target.value will reload
         event.target.value = '';
     })
@@ -80,7 +79,6 @@ export const App = (elementId) => {
        }
 
        displayTodos();
-       updatePendingCount();
     })
     
 
@@ -88,7 +86,6 @@ export const App = (elementId) => {
     deleteCompletedButton.addEventListener('click', () => {
         todoStore.deleteCompleted();
         displayTodos();
-        updatePendingCount();
     })
 
     // change filters
