@@ -5,9 +5,9 @@ import { heroes } from "../data/heroes";
  * @param {HTMLDivElement} element 
  */
 export const callbacksComponent = (element) => {
-	const id = "5d86371f2343e37870b91ef1";
-	findHero(id, ({name}) => { // destructuring name
-		element.innerHTML = name; // Hulk
+	const id = "5d86371f2343e37870b91ef12";
+	findHero(id, (hero) => { // destructuring name
+		element.innerHTML = hero?.name || "There's no hero";  // Hulk
 	});
 	
 }
