@@ -1,7 +1,8 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
-import { environmentComponents } from './concepts/environments'
+// import { environmentComponents } from './concepts/environments'
+import { callbacksComponent } from './concepts/callbacks'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -18,4 +19,5 @@ document.querySelector('#app').innerHTML = `
 `
 // render environment variables outputs in the main card
 const element = document.querySelector(".card");
-environmentComponents(element);
+// environmentComponents(element);
+callbacksComponent(element);
