@@ -5,8 +5,12 @@ import { heroes } from "../data/heroes";
  * @param {HTMLDivElement} element 
  */
 export const callbacksComponent = (element) => {
-	const id = "5d86371f2343e37870b91ef12";
-	findHero(id, (error, hero) => { // destructuring name
+	const id1 = "5d86371f2343e37870b91ef1";
+	const id2 = "5d86371fd55e2e2a30fe1ccb";
+
+
+	// this is a callback hell: callbacks inside other callbacks... not the best approach.
+	findHero(id1, (error, hero1) => { // destructuring name
 		// element.innerHTML = hero?.name || "There's no hero";
 
 		if (error) {
@@ -14,10 +18,18 @@ export const callbacksComponent = (element) => {
 			return; // this way we can handle error
 		}
 
-		element.innerHTML = hero.name; // Hulk
+		findHero(id2, (error, hero2) => {
+			if (error) {
+				element.innerHTML = error;
+				return; // this way we can handle error
+			}
+
+			element.innerHTML = `${hero1.name} / ${hero2.name}`; // -> Hulk / Black Panther
+		})
 	});
 	
 }
+
 
 /**
  * 
