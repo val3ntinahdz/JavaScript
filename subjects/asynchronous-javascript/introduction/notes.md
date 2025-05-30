@@ -40,22 +40,6 @@ The event loop is what makes async JavaScript work.
 - **Callback Queue**: stores ready-to-run tasks.
 - **Event Loop**: moves tasks from queue to stack when idle.
 
-     ┌──────────────┐
-     │  Call Stack  │
-     └────┬───▲─────┘
-          │   │
-  Tasks pushed│
-          │   │ When done
-     ┌────▼───┴─────┐
-     │ Event Loop   │
-     └────┬───▲─────┘
-          │   │
-  Async done   │
-          │   │
-     ┌────▼───┴────┐
-     │ Callback    │
-     │   Queue     │
-     └─────────────┘
 
 
 So... basically
