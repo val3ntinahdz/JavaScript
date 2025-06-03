@@ -12,15 +12,37 @@
 // }
 
  
-const calculateRadius = () => {
-    console.log("calculate radius function connnected");
+const createCircle = (cx, cy, radius) => {
+    return new Promise((resolve => {
+        if(!document.querySelector(".circle")) { // the circle now appears only once
+            const div = document.createElement('div');
+            div.style.width = 0;
+            div.style.height = 0;
+            div.style.top = cy + "px";
+            div.style.left = cx + "px";
+            div.className = 'circle';
+            div.style.background = "red";
+            div.style.border = "1px solid black";
 
-    const div = document.createElement('div');
-    div.style.width = 150;
-    div.style.height = 150;
-    div.style.backgroundColor = "red";
-    div.className = 'circle';
 
-    document.body.append(div);
-    const computedStyle = getComputedStyle(div);
+            document.body.append(div);
+
+            setTimeout(() => {
+                div.style.transition = "width 0.5s ease, height 0.5s ease, border-radius 0.5s ease";
+                div.style.width = radius * 2 + "px";
+                div.style.height = radius * 2 + "px";
+                div.style.borderRadius = radius * 2 + "px";
+            }, 0)
+
+
+            setTimeout(() => resolve(div), 500);
+        } else {
+            resolve(document.querySelector(".circle"));
+        }
+    }));
+    // console.log("calculate radius function connnected");
+
+    return;
 }
+
+// createCircle(150, 150, 100);
