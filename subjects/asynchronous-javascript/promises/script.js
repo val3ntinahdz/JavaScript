@@ -23,4 +23,5 @@ const calculateRadius = () => {
 
     document.body.append(div);
     const computedStyle = getComputedStyle(div);
+    console.log("this is the divs computed style>", computedStyle);
 }
