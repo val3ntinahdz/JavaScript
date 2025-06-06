@@ -26,4 +26,4 @@ const element = document.querySelector(".card");
 // callbacksComponent(element);
 // promiseComponent(element);
 // promiseRaceComponent(element);
-asyncComponent();
+asyncComponent(element);
