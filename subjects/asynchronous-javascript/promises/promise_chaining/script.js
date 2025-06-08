@@ -21,6 +21,14 @@ axiosRequest.get("https://v2.jokeapi.dev/joke/Any")
             if (result.joke.toLowerCase().startsWith("c")) {
                 return result.joke
             }
+        } else if (result.type === "twopart") {
+            if (
+                result.setup.toLowerCase().startsWith('c') && 
+                (result.delivery.toLowerCase().startsWith('c'))
+            ) {
+                console.log(`This jokes start with letter C > ${result.setup} - ${result.delivery}`);
+                return result; // this line returns the entire object!
+            }
         }
 
         return result;
