@@ -8,27 +8,39 @@ import axiosRequest from 'https://esm.sh/axios';
 
 async function parseJokes() {
 
-    const result = await axiosRequest.get("https://v2.jokeapi.dev/joke/Any")
-    const { joke, type, setup, delivery } = result.data;
-
-    if (type === "single") {
-        if (joke.toLowerCase().startsWith("c")) {
-            return joke;
+    
+    try {
+        
+        const result = await axiosRequest.get("https://v2.jokeapi.dev/joke/Any")
+        const { joke, type, setup, delivery } = result.data;
+        
+        if (type === "single") {
+            if (joke.toLowerCase().startsWith("c")) {
+                return joke;
+            }
+    
+        } else if (type === "twopart") {
+    
+            if (
+                setup.toLowerCase().startsWith('c') && 
+                (delivery.toLowerCase().startsWith('c'))
+            ) {
+                console.log(`This jokes start with letter C > ${setup} - ${delivery}`);
+            }
         }
+    
+    
+        const theActualJoke = joke ?? `${setup} - ${delivery}`;
+        console.log("The actual joke: ", theActualJoke);
+    
+        return theActualJoke;
 
-    } else if (type === "twopart") {
+    } catch (error) {
 
-        if (
-            setup.toLowerCase().startsWith('c') && 
-            (delivery.toLowerCase().startsWith('c'))
-        ) {
-            console.log(`This jokes start with letter C > ${setup} - ${delivery}`);
-        }
+        alert("No joke could be displayed. Try later.")
+        alert(`ERROR ${error}`);
     }
 
-
-    const theActualJoke = joke ?? `${setup} - ${delivery}`;
-    console.log("The actual joke: ", theActualJoke);
-    
-    return theActualJoke;
 }
+
+parseJokes();
