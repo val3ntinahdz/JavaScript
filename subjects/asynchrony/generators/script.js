@@ -13,11 +13,16 @@ function* fibonacciGenerator(limit) {
     }
 }
 
+
 // TODO: create a set timer to log the next Fibonacci number every second
+const fibGen = fibonacciGenerator(7);
 
-// Example usage:
-const fibGen = fibonacciGenerator(6); // Generates first 6 Fibonacci numbers
+async function logFibonacciNums() {
+   for(num of fibGen) {
+        console.log(num);
 
-for (const num of fibGen) {
-    console.log(num);
+        await new Promise(resolve => { setTimeout(resolve, 1000) });
+    }
 }
+
+logFibonacciNums();
