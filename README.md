@@ -11,8 +11,8 @@ This repository contains my learning journey through JavaScript — from basic s
 - ✅ Functions and Scope
 - ✅ DOM Manipulation
 - ✅ Events and Listeners
-- ⏳ Async JS & Promises (coming soon)
-- ⏳ Fetch API + JSON (coming soon)
+- ✅ Async JS & Promises
+- ✅ Generators
 
 ## Learning Approach
 
