@@ -17,13 +17,13 @@ function* fibonacciGenerator(limit) {
 // TODO: create a set timer to log the next Fibonacci number every second
 const fibGen = fibonacciGenerator(13);
 const controller = new AbortController();
+const isPaused = false;
 
 async function logFibonacciNums() {
     
     // MDN Docs says: AbortController.abort()
     // Aborts an asynchronous operation before it has completed. 
     // This is able to abort fetch requests, consumption of any response bodies, and streams.
-
     setTimeout(() => { // Interrupt the generator after 10 seconds passed even if there´re still numbers
         controller.abort();
         console.log("Fibonacci generator paused.")
@@ -38,6 +38,8 @@ async function logFibonacciNums() {
 
     } catch (error) {
         alert(error);
+    } finally {
+        console.log("DONE!");
     }
 }
 

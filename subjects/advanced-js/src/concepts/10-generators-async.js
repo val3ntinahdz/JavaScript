@@ -8,7 +8,6 @@ export const generatorAsyncComponent = async( element ) => {
     let isFinished = false;
 
     do {
-
         const { value, done } = await heroGenerator.next();
         isFinished = done;
 
