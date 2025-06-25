@@ -43,24 +43,13 @@ export const BreakingbadApp = async(element) => {
 
     }
     
-    const loadingMessage = document.getElementById("loading-message");
     
     // añadir event listener a botón de next quote 
     nextQuoteBtn.addEventListener("click", async() => {
-        loadingMessage.style.display = "block";
+        element.innerHTML = "Loading...";
 
-        try {
-            const response = await fetch(api)
-            const data = await response.json();
-
-            const quoteData = data[0];
-            renderQuote(quoteData);
-
-        } catch (error) {
-            document.querySelector("#app-title").innerHTML = `ERROR: ${error};`
-        } finally {
-            loadingMessage.style.display = "none";
-        }
+        const quote = await fetchQuote();
+        renderQuote(quote);
     })
     
     fetchQuote()
