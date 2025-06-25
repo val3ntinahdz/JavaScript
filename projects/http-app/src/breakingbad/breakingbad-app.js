@@ -43,9 +43,12 @@ export const BreakingbadApp = async(element) => {
 
     }
     
+    const loadingMessage = document.getElementById("loading-message");
     
     // añadir event listener a botón de next quote 
     nextQuoteBtn.addEventListener("click", async() => {
+        loadingMessage.style.display = "block";
+
         try {
             const response = await fetch(api)
             const data = await response.json();
@@ -55,6 +58,8 @@ export const BreakingbadApp = async(element) => {
 
         } catch (error) {
             document.querySelector("#app-title").innerHTML = `ERROR: ${error};`
+        } finally {
+            loadingMessage.style.display = "none";
         }
     })
     

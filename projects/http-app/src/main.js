@@ -12,6 +12,7 @@ document.querySelector('#app').innerHTML = `
       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
     </a>
     <h1 id="app-title">Hello Vite!</h1>
+    <h2 id="loading-message">Loading...</h2>
     <div class="card">
       
     </div>
