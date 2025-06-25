@@ -47,11 +47,12 @@ export const BreakingbadApp = async(element) => {
     // añadir event listener a botón de next quote 
     nextQuoteBtn.addEventListener("click", async() => {
         element.innerHTML = "Loading...";
-
-        const quote = await fetchQuote();
-        renderQuote(quote);
+        loadQuote();
     })
     
-    fetchQuote()
-        .then(renderQuote);
+    const loadQuote = () => {
+        fetchQuote().then(renderQuote);
+    }
+
+    loadQuote();
 }
