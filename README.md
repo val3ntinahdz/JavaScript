@@ -13,6 +13,8 @@ This repository contains my learning journey through JavaScript — from basic s
 - ✅ Events and Listeners
 - ✅ Async JS & Promises
 - ✅ Generators
+- ✅ Network requests
+- [PENDING] CRUD-App project!
 
 ## Learning Approach
 
