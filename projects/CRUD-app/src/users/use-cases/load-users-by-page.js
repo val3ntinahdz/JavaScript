@@ -11,13 +11,12 @@ export const loadUsersByPage = async( page = 1 ) => {
     // console.log(url);
     const res = await fetch(url);
     const { data } = await res.json();
-
-    // make the data response return the new instance of the User Object
+    
+    // By calling the function "localhostUserToModel" we ensure that the data
+    // is returned with the attributes we set up in our mapper (firstName and lastName)
     const users = data.map(localhostUserToModel);
-    return users; // [User, User, User, x7]
-    // console.log(data);
-    // console.log(data.data);
-
-    // const user = new User(data);
-    // const dataUser = localhostUserToModel(user);
+    console.log(users);
+    
+    // make the data response return the new instance of the User Object
+    return users;
 }

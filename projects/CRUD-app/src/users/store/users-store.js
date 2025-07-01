@@ -6,7 +6,14 @@ const state = {
 }
 
 const loadNextPage = async() => {
-    await loadUsersByPage(state.currentPage + 1);
+    const users = await loadUsersByPage(state.currentPage + 1);
+    if (users.length === 0) return;
+
+    // i will only change the page if there are users in the response above 
+    state.currentPage += 1;
+    state.users = users;
+
+    console.log(state);
     
 }
 
@@ -29,6 +36,6 @@ export default {
     onUserChanged,
     reloadPage,
 
-    getUser: () => [...state.users],
+    getUsers: () => [...state.users],
     getCurrentPage: () => state.currentPage,
 }

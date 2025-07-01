@@ -5,6 +5,9 @@ import { User } from "../models/user"
  * @param {Like<User>} localhostUser 
  * @returns {User<Object>}
  */
+
+
+// We create a mapper to map this set of objects using a mapping method.
 export const localhostUserToModel = ( localhostUser ) => {
     const {
         avatar,
