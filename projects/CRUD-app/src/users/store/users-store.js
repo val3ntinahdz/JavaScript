@@ -6,8 +6,8 @@ const state = {
 }
 
 const loadNextPage = async() => {
-    if (users.length === 0) return;
     const users = await loadUsersByPage(state.currentPage + 1);
+    if (users.length === 0) return;
 
     // i will only change the page if there are users in the response above 
     state.currentPage += 1;
@@ -18,8 +18,8 @@ const loadNextPage = async() => {
 }
 
 const loadPreviousPage = async() => {
-    if (users.length === 1) return;
     const users = await loadUsersByPage(state.currentPage - 1);
+    if (users.length === 1) return;
 
     // i will only change the page if there are users in the response above 
     state.currentPage -= 1;
