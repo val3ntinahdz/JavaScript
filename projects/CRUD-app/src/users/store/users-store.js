@@ -6,8 +6,8 @@ const state = {
 }
 
 const loadNextPage = async() => {
-    const users = await loadUsersByPage(state.currentPage + 1);
     if (users.length === 0) return;
+    const users = await loadUsersByPage(state.currentPage + 1);
 
     // i will only change the page if there are users in the response above 
     state.currentPage += 1;
@@ -18,7 +18,14 @@ const loadNextPage = async() => {
 }
 
 const loadPreviousPage = async() => {
-    throw new Error("Not implemented");
+    if (users.length === 1) return;
+    const users = await loadUsersByPage(state.currentPage - 1);
+
+    // i will only change the page if there are users in the response above 
+    state.currentPage -= 1;
+    state.users = users;
+
+    console.log(state);
     
 }
 

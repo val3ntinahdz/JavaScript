@@ -11,7 +11,6 @@ export const renderButtons = (element) => {
 
     const prevBtn = document.createElement("button");
     prevBtn.innerText = " ⏮ ";
-    
     const currentPageLabel = document.createElement("span");
     currentPageLabel.id = "current-page";
     currentPageLabel.innerText = usersStore.getCurrentPage();
@@ -19,8 +18,24 @@ export const renderButtons = (element) => {
     element.append(prevBtn, currentPageLabel, nextBtn);
 
 
-    nextBtn.addEventListener("click", () => {
-        const nextPage = usersStore.loadNextPage();
-        renderTableComponent(nextPage);
-    })
+    nextBtn.addEventListener("click", async() => {
+        await usersStore.loadNextPage();
+        currentPageLabel.innerText = usersStore.getCurrentPage();
+        renderTableComponent(element);
+
+
+
+        console.log("Users in the array:", usersStore.getUsers().length); // 10
+
+        // if(usersStore.getCurrentPage() > usersStore.getUsers().length) {
+        //     currentPageLabel.innerText = "No more users to show!";
+        // }
+        
+    });
+
+    prevBtn.addEventListener("click", async() => {
+        await usersStore.loadPreviousPage();
+        renderTableComponent(element);
+        currentPageLabel.innerText = usersStore.getCurrentPage();
+    });
 }
