@@ -1,3 +1,4 @@
+import { renderButtons } from "./presentation/render-buttons/render-buttons";
 import { renderTableComponent } from "./presentation/render-table/render-table";
 import usersStore from "./store/users-store";
 
@@ -10,4 +11,5 @@ export const UsersApp = async( element ) => {
     await usersStore.loadNextPage();
     // console.log(usersStore.getUsers()); // 10 users
     renderTableComponent(element);
+    renderButtons(element);
 }

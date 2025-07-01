@@ -1,0 +1,14 @@
+button {
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #535bf2;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#current-page {
+    font-size: 1.3rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
