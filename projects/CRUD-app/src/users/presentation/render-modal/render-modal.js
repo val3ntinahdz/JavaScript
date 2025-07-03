@@ -56,6 +56,10 @@ export const renderModal = (element) => {
                 continue; 
             }
 
+            if (!userLike["isActive"]) {
+                userLike["isActive"] = false;
+            }
+
 
 
             userLike[key] = value;
