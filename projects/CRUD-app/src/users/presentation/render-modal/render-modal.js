@@ -4,18 +4,34 @@
 
 import modalHtml from "./render-modal.html?raw";
 import "./render-modal.css";
+import { User } from "../../models/user";
+import { getUserById } from "../../use-cases/get-user-by-id";
 let modal;
 let form;
 
 // TODO: load user by id
-export const showModal = () => {
+export const showModal = async(id) => {
     modal?.classList.remove("hide-modal"); // if modal exists... the hide-modal class is removed
+
+    // TODO: GET USERS BY ID
+    
+    if (!id) return;
+    const user = await getUserById(id);
+    console.log(user);
 }
 
 export const hideModal = () => {
     // TODO: form reset
     modal?.classList.add("hide-modal");
     form?.reset();
+}
+
+/**
+ * 
+ * @param {User} user 
+ */
+const setFormValues = (user) => {
+
 }
 
 /**
@@ -39,6 +55,7 @@ export const renderModal = (element, callback) => {
 
     console.log(form);
 
+    // in this listener, we make sure we submit the code in the correct format
     form.addEventListener("submit", async(event) => {
         event.preventDefault();
 

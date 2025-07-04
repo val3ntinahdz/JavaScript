@@ -39,3 +39,5 @@ export const renderButtons = (element) => {
         currentPageLabel.innerText = usersStore.getCurrentPage();
     });
 }
+
+// TODO: FIX PAGINATION BUG (new created instances does not appear in the table)
