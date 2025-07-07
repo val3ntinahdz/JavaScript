@@ -6,8 +6,8 @@ import modalHtml from "./render-modal.html?raw";
 import "./render-modal.css";
 import { User } from "../../models/user";
 import { getUserById } from "../../use-cases/get-user-by-id";
-let modal;
-let form;
+let modal, form;
+let loadedUser = {};
 
 // TODO: load user by id
 export const showModal = async(id) => {
@@ -17,7 +17,9 @@ export const showModal = async(id) => {
     
     if (!id) return;
     const user = await getUserById(id);
-    console.log(user);
+    // call function to click on a user and automatically fill the form with its info
+    setFormValues(user);
+    
 }
 
 export const hideModal = () => {
@@ -31,7 +33,12 @@ export const hideModal = () => {
  * @param {User} user 
  */
 const setFormValues = (user) => {
+    form.querySelector('[name="firstName"]').value = user.firstName;
+    form.querySelector('[name="lastName"]').value = user.lastName;
+    form.querySelector('[name="balance"]').value = user.balance;
+    form.querySelector('[name="isActive"]').checked = user.isActive;
 
+    loadedUser = user;
 }
 
 /**
@@ -60,7 +67,7 @@ export const renderModal = (element, callback) => {
         event.preventDefault();
 
         const formData = new FormData(form);
-        const userLike = {}
+        const userLike = { ...loadedUser };
 
         for (const [key, value] of formData) {
             

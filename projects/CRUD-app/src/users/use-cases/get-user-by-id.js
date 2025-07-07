@@ -3,14 +3,14 @@ import { User } from "../models/user";
 
 /**
  * 
- * @param {Number} page 
+ * @param {String|Number} page 
  * @returns { Promise<User[]>}
  */
 export const getUserById = async(id) => {
-    const url = `${ import.meta.env.VITE_BASE_URL }/users?_page=${page}`; 
+    const url = `${ import.meta.env.VITE_BASE_URL }/users/${id}`; 
     // console.log(url);
     const res = await fetch(url);
-    const { data } = await res.json();
+    const data = await res.json();
     
     // By calling the function "localhostUserToModel" we ensure that the data
     // is returned with the attributes we set up in our mapper (firstName and lastName)
