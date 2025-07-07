@@ -67,7 +67,11 @@ export const renderModal = (element, callback) => {
         event.preventDefault();
 
         const formData = new FormData(form);
+
         const userLike = { ...loadedUser };
+
+        // save isActive state to handle checkbox change from false -> true
+        userLike.isActive = form.querySelector('[name="isActive"]').checked;
 
         for (const [key, value] of formData) {
             
@@ -77,7 +81,7 @@ export const renderModal = (element, callback) => {
             }
 
             if (key === "isActive") {
-                userLike[key] = (value === "on") ? true:false;
+                userLike[key] = (value === "on") ? true : false;
                 continue; 
             }
 
