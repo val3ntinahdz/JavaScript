@@ -1,4 +1,5 @@
 import usersStore from "../../store/users-store";
+import { deleteUser } from "../../use-cases/delete-user-by-id";
 import { showModal } from "../render-modal/render-modal";
 import "./render-table.css";
 
@@ -37,6 +38,32 @@ const tableSelectListener = (event) => {
     showModal(id);
 }
 
+
+/**
+ * 
+ * @param {MouseEvent} event 
+ */
+const tableDeleteListener = async(event) => {
+    const element = event.target.closest(".delete-user");
+    console.log(element);
+
+    if (!element) return;
+    const id = element.getAttribute("data-id");
+
+    try {
+        // delete user
+        await deleteUser(id);
+        // reload the page
+        await usersStore.reloadPage();
+        // load the page in case the step above ocurred
+        document.querySelector("#current-page").innerText = usersStore.getCurrentPage();
+        // render page
+        renderTableComponent();
+    } catch (error) {
+        alert(error);
+    }
+}
+
 /**
  * 
  * @param {HTMLDivElement} element 
@@ -52,7 +79,8 @@ export const renderTableComponent = (element) => {
         element.append(table);
 
         // TODO: Add listeners to table
-        table.addEventListener("click",tableSelectListener);
+        table.addEventListener("click", tableSelectListener);
+        table.addEventListener("click", tableDeleteListener);
     }
 
     let tableHTML = "";
