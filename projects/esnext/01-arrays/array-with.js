@@ -1,4 +1,4 @@
-const classicBooks = [
+const state = [
     {
         id: 1,
         name: "Pride & Prejudice"
@@ -17,21 +17,33 @@ const classicBooks = [
     }
 ];
 
-// What is a deep copy algorithm?
-// web.dev says: A deep copy algorithm also copies an object’s properties one by one, but invokes itself recursively when it finds a reference to another object, 
-// creating a copy of that object as well. 
+
+const index = 1;
+const newName = "Le petit prince";
+
+// const newState = state.map((hero, i) => {
+//     if (i == index) {
+//         hero.name = newName;
+//     }
+
+//     return hero; 
+// });
 
 
-// structuredClone is a built-in JavaScript function used for creating deep copies of objects 
-// since trying to copy them using the "..." (spread operator) caused changes in the structure of the first object
+// the array.with() method is used to copy a version of an array instance and change
+// a value of a given index
 
-// previously, a JSON-based hack was commonly used to solve this problem
-// example: const myDeepCopy = JSON.parse(JSON.stringify(myOriginal));
+// in this example, we are passing an index at position 1,
+// and replacing its "name" value with a new name (see line 22)
 
-// read this article if you want to get nerdy about this cool method in ESNext:
-// https://web.dev/articles/structured-clone
-const classicBooksCopy = structuredClone(classicBooks);
-classicBooksCopy[2].name = "La peste";
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/with
+const newState = state.with(index, {
+    // .at() is an elegant method that help us retrieve an array´s value from a given position
+    // check: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
+    ...state.at(index),
+    name: newName
+}) 
 
-console.table(classicBooks);
-console.table(classicBooksCopy);
+state[0].name = "vAlu";
+
+console.table(newState);
