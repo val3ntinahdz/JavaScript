@@ -28,11 +28,7 @@ This repository contains my learning journey through JavaScript — from basic s
 - JavaScript (ES6+)
 - HTML / CSS
 - Live Server / Vite for testing
-
-## Last Updated
-
-Jun 2025
-
+  
 ## 🚀 About Me
 
 I’m an 18-year-old aspiring software engineer building my portfolio while learning.  
