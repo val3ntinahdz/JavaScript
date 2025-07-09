@@ -14,7 +14,8 @@ This repository contains my learning journey through JavaScript — from basic s
 - ✅ Async JS & Promises
 - ✅ Generators
 - ✅ Network requests
-- [PENDING] CRUD-App project!
+- ✅ CRUD-App project!
+- ✅ ESNext
 
 ## Learning Approach
 
